@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="gui">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Fancy-Bank-master/src/gui/jdatepicker-1.3.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Fancy-Bank-master/src/gui/sqlite-jdbc-3.20.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
