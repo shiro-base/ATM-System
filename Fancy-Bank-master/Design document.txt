@@ -1,0 +1,100 @@
+﻿Object Design Document
+
+
+Overall Design Principle
+
+
+The overall design principle is focusing on low coupling. The system will use a SQL database to store and manage information about the bank, its customers, and their accounts. The gui package will provide an intuitive interface for customers to interact with the system. The ATM class in the bank package manages the interaction between gui, backend, and database. The backend can be roughly divided into bank system, customer system, and stock market system.
+
+
+Design
+
+
+The GUI
+
+
+* The GUI is a well-connected component of our project that serves as the starting point for the Customer as well as Manager of our Fancy Bank application. 
+* The LoginPage is the starting page and the various UI classes are ensured to be modular and well defined. Every function that the user performs has a class associated with it that references other classes for layouts, values or other interrelated data.
+*  The GUI connects with the backend through the ATM class for all the necessary information that is displayed on the screen. There is no computation of any values on the frontend except for a few edge cases and error messages on wrong inputs.
+* A total of 34 files make up the gui package, so as to ensure minimal overlapping between functionalities. Only the ATM object is created from the GUI which serves as a controller that provides the GUI with the outputs with the necessary abstraction.
+* Error handling is done at every step on the UI pages and appropriate components and fields are used where required so as to provide an accurate, smooth and error-free process. 
+* Ease of Access is ensured by having Back and Logout buttons at every step so that the user can quit the application whenever they want to. Frame class and ActionListener interface were extensively used throughout the UI design process.
+  
+
+
+
+The Database 
+
+
+We have created a bank database system which incorporates BankReservesDatabase that stores information about the bank, a database to store customer information, CustomerDatabase, CustomerLoginDatabase to store login information for customers, EmployeeLoginDatabase to store Employee information, StocksDatabase to store stock data and TransactionDatabase to keep track of all the transactions.
+
+
+  
+
+
+
+The Bank
+
+
+The Bank package will maintain a list of customers and will provide methods for adding and removing customers , as well as for accessing customers information. As the bank side of the program, a BankManger as a sort of BankEmployee can manage stocks status in the StockMarket as well as check specific customers in the bank or get a daily report of transactions. ATM will deal with the requests from the user at the front end. The ATM is able to satisfy customer requests such as withdrawals, deposits, transfer to other customers, take loans, etc. For BankManager, who is the administrator of the bank, the ATM can retrieve customer and transaction information from the database and display to the manager view only window.  A manger can:
+* View daily report of transactions
+* View specific customers
+* Manage stocks
+  
+
+
+
+The Account package will store information about a specific bank account, including the account id, balance, and type. It will provide methods for depositing and withdrawing funds. The abstract Account class has 3 subclasses: savingAccount, checkingAccount, and securityAccount. The savingAccount also checks the money threshold needed to open and transfer money to the security account.
+  
+
+
+
+The Customer
+
+
+The Customer class will store information about a customer of the bank, including their basic info, accounts they hold, the transaction history and loans they borrowed. It will provide methods for accessing and updating these information. It also has methods for opening and closing accounts, deposit, withdraw and transfer money between customers and accounts. 
+Each customer can - 
+* Open multiple accounts
+* Maintain deposits in 3 different currencies
+* Take loans, if they have collateral
+* Repay loans
+* Deposit money
+* Withdraw money
+* Transfer money to self/ different account
+* View all their transactions
+* Trade stocks (if they have enough money)
+* Close account
+
+
+The Transaction class will represent a transaction made on an account, and will store information about the transaction type, amount, and date and time. It will provide methods for accessing and updating this information.
+  
+
+
+
+
+
+Stock Market
+
+
+The StockMarket package is responsible for managing stocks. Its corresponding database is StocksDatabase.
+Each Stock is buyable(Interface) and Sellable (Interface). All transactions for a stock, i.e. buying, selling, adding and modifying a stock happens through the StockMarket. A customer can buy and sell stocks with the help of his security account. 
+The bank also charges a fee every time the customer buys a stock. 
+A customer can play in the stock market if they have security account and enough money in the bank -
+* Buy stocks - the bank charges you to do this
+* Sell stock (partial or complete)
+* View their realized and unrealized profits
+* Check the price at which they bought the stock
+A manager is responsible for - 
+* Updating stock prices in the stock market
+* Modifying the quantity of stocks in the market (like, remove a stock, in case the company got shut down)
+
+
+  
+
+
+
+Labor division:
+Sakshi Sharma (phsakshi@bu.edu): Database & StockMarket & Exceptions package
+Ye Tian (ty2806@bu.edu): Main package & account package & Loan package & currency package
+Tianxin Zhou (txzhou@bu.edu): bank package
+Smriti Suresh (smritis@bu.edu): gui package
